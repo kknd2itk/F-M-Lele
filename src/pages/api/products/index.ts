@@ -15,12 +15,15 @@ export default async function handler(
       const allProducts = await prisma.product.findMany()
       res.status(200).json(allProducts)
     } else if (req.method === "POST") {
-      const { title, description } = req.body
+      const { title, description, phoneNumber, price, imagePath } = req.body
 
       await prisma.product.create({
         data: {
           title,
           description,
+          price,
+          phoneNumber,
+          imagePath,
           sellerId: session?.user?.userProfile?.id,
         },
       })

@@ -43,6 +43,7 @@ model User {
   email         String?      @unique
   emailVerified DateTime?
   image         String?
+  isSeller      Boolean?     @default(false)
   isAdmin       Boolean?     @default(false)
   accounts      Account[]
   sessions      Session[]
@@ -63,7 +64,7 @@ model Product {
   title       String      @db.VarChar(300)
   description String      @db.VarChar(1000)
   price       Int?         
-  image       String?
+  imagePath   String?
   phoneNumber Int?
   seller      UserProfile @relation(fields: [id], references: [id])
   sellerId    String
