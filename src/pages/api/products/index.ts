@@ -18,14 +18,7 @@ export default async function handler(
       const { title, description, phoneNumber, price, imagePath } = req.body
 
       await prisma.product.create({
-        data: {
-          title,
-          description,
-          price,
-          phoneNumber,
-          imagePath,
-          sellerId: session?.user?.userProfile?.id,
-        },
+        data: { title, description, phoneNumber, price, imagePath },
       })
     }
   } else {

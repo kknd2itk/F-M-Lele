@@ -31,10 +31,8 @@ export const Navbar = () => {
           >
             Forum
           </Link>
-        </ul>
-        <>
           {session ? (
-            <a
+            <li
               className="relative cursor-pointer "
               onClick={() => {
                 setAccountMenu(!accountMenu)
@@ -75,18 +73,20 @@ export const Navbar = () => {
                   </li>
                 </ul>
               </div>
-            </a>
+            </li>
           ) : (
-            <button
-              className="border border-cyan-800 text-cyan-800 w-1/3 px-6 py-3 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-white hover:bg-cyan-500 transition delay-0 ease-in"
-              onClick={() => {
-                signIn()
-              }}
-            >
-              Login
-            </button>
+            <li>
+              <button
+                className="border border-cyan-800 text-cyan-800 px-6 py-3 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-white hover:bg-cyan-500 transition delay-0 ease-in"
+                onClick={() => {
+                  signIn()
+                }}
+              >
+                Login
+              </button>
+            </li>
           )}
-        </>
+        </ul>
       </div>
     </nav>
   )

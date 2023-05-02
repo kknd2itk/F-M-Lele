@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { useState } from "react"
+import { supabase } from "@/lib/supabase"
 
 export default function AddProductPage() {
   const [selectedImage, setSelectedImage] = useState()
@@ -10,7 +11,14 @@ export default function AddProductPage() {
     }
   }
 
-  const uploadToServer = async () => {}
+  const uploadToServer = async (e: any) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const imageFile = e.target.files[0]
+      const { data, error } = await supabase.storage
+        .from("avatars")
+        .upload("public/avatar1.png", avatarFile)
+    }
+  }
 
   return (
     <section className="h-[82vh]">
