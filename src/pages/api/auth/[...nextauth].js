@@ -14,9 +14,10 @@ export const authOptions = {
     // ...add more providers here
   ],
   callbacks: {
-    session({ session, user }) {
-      if (session.user) {
+    session: ({ session, user }) => {
+      if (session.user !== undefined) {
         session.user.id = user.id
+        session.user.role = user.role
       }
       return session
     },

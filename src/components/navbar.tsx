@@ -1,8 +1,10 @@
 import { useState } from "react"
 import { useSession, signIn, signOut } from "next-auth/react"
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 export const Navbar = () => {
+  const router = useRouter()
   const [accountMenu, setAccountMenu] = useState(false)
   const { data: session } = useSession()
 
@@ -39,12 +41,12 @@ export const Navbar = () => {
               }}
             >
               <h3 className="border border-cyan-800 text-cyan-800 px-6 py-3 rounded-md font-medium hover:bg-gradient-to-br hover:text-white hover:bg-cyan-500 transition delay-0 ease-in">
-                Hello, {session?.user?.email}{" "}
+                Hello, {session?.user?.name}
               </h3>
               <div
                 className={
                   accountMenu
-                    ? "flex flex-col border absolute w-full rounded-lg top-14 left-0"
+                    ? "flex flex-col border absolute w-full rounded-lg top-14 left-0 z-10 "
                     : "hidden"
                 }
               >

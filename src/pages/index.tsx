@@ -7,7 +7,7 @@ export default function Home() {
   const { data: session } = useSession()
 
   return (
-    <section className="mx-12 px-6 flex flex-row justify-center items-center h-[82vh]">
+    <section className="flex flex-row justify-center items-center h-[82vh]">
       <div className="w-1/2 justify-center items-center flex">
         <Image src={img1} alt="Illustrasi Pemancingan" />
       </div>

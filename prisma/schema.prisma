@@ -39,40 +39,35 @@ model User {
   email         String?      @unique
   emailVerified DateTime?
   image         String?
-  isSeller      Boolean?     @default(false)
-  isAdmin       Boolean?     @default(false)
+  role          Role         @default(USER)
   accounts      Account[]
   sessions      Session[]
-  UserProfile   UserProfile?
-}
-
-model UserProfile {
-  id       String   @unique @default(uuid())
-  posts    Post?
-  products Product?
-  user     User     @relation(fields: [id], references: [id])
+  products      Product[]
+  posts         Post[]
 }
 
 model Product {
-  id          String      @id @default(uuid())
-  updatedAt   DateTime    @default(now())
-  createdAt   DateTime    @default(now())
-  title       String      @db.VarChar(300)
-  description String      @db.VarChar(1000)
+  id          String      @id
+  updatedAt   DateTime    
+  createdAt   DateTime    
+  title       String      
+  description String      
   price       Int
   imagePath   String
-  phoneNumber Int
-  seller      UserProfile @relation(fields: [id], references: [id])
+  phoneNumber String
+  sellerId    String
+  seller      User        @relation(fields: [sellerId], references: [id])
 }
 
 model Post {
-  id        String      @id @default(uuid())
-  createdAt DateTime    @default(now())
-  title     String      @db.VarChar(300)
-  caption   String      @db.VarChar(1000)
+  id        String      @id
+  createdAt DateTime    
+  title     String      
+  caption   String      
   upvotes   Int         @default(0)
   downvotes Int         @default(0)
-  author    UserProfile @relation(fields: [id], references: [id])
+  authorId  String
+  author    User        @relation(fields: [authorId], references: [id])
 }
 
 model VerificationToken {
@@ -81,4 +76,10 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum Role {
+  USER
+  SELLER
+  ADMIN
 }
