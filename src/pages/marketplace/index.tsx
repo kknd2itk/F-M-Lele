@@ -7,7 +7,9 @@ import { CardItem } from "@/components"
 
 export async function getServerSideProps() {
   // Fetch data from the API
-  const { data } = await apiClient.get(process.env.API_PRODUCT_ENDPOINT || "")
+  const { data } = await apiClient.get(
+    process.env.NEXT_PUBLIC_API_PRODUCT_ENDPOINT || "",
+  )
 
   // Pass the data to the page as props
   return {

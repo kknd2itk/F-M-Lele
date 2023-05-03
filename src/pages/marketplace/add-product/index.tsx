@@ -39,7 +39,7 @@ export default function AddProductPage() {
       }
 
       await apiClient
-        .post(process.env.API_PRODUCT_ENDPOINT || "", {
+        .post(`${process.env.NEXT_PUBLIC_API_PRODUCT_ENDPOINT}` || "", {
           title: title,
           description: description,
           price: parseInt(price),
@@ -49,7 +49,9 @@ export default function AddProductPage() {
         })
         .then(async (response) => {
           console.log(response)
-          router.push("/marketplace")
+          if (response.status === 200) {
+            router.push("/marketplace")
+          }
         })
         .catch((error) => {
           setErrorMessage(error)

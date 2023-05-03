@@ -10,7 +10,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const productId = context.params?.productId as string
 
   const { data: productData } = await apiClient.get(
-    `${process.env.API_PRODUCT_ENDPOINT}?id=${productId}` || "",
+    `${process.env.NEXT_PUBLIC_API_PRODUCT_ENDPOINT}?id=${productId}` || "",
   )
 
   const userData = await prisma.user.findUnique({
