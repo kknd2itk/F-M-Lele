@@ -11,11 +11,12 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     const { id } = req.query
+    const productId = Array.isArray(id) ? id[0] : id
 
     try {
       if (id) {
         const product = await prisma.product.findUnique({
-          where: { id: id },
+          where: { id: productId },
         })
         if (!product) {
           res.status(404).json({
@@ -50,6 +51,33 @@ export default async function handler(
     const { title, description, phoneNumber, price, imagePath, sellerId } =
       req.body
 
+    if (
+      !title ||
+      !description ||
+      !phoneNumber ||
+      !price ||
+      !imagePath ||
+      !sellerId
+    ) {
+      res.status(400).json({
+        status: "failed",
+        message: "All fields are required",
+      })
+      return
+    }
+
+    if (
+      typeof phoneNumber !== "string" ||
+      typeof price !== "number" ||
+      typeof imagePath !== "string"
+    ) {
+      res.status(400).json({
+        status: "failed",
+        message: "Invalid data type",
+      })
+      return
+    }
+
     const id = uuidv4()
     const now = new Date().toISOString()
 
@@ -82,6 +110,7 @@ export default async function handler(
   } else if (req.method === "PUT") {
     const { id } = req.query
     const { title, description, phoneNumber, price, imagePath } = req.body
+    const productId = Array.isArray(id) ? id[0] : id
 
     if (!title || !description || !phoneNumber || !price || !imagePath) {
       res.status(400).json({
@@ -92,7 +121,7 @@ export default async function handler(
     }
 
     if (
-      typeof phoneNumber !== "number" ||
+      typeof phoneNumber !== "string" ||
       typeof price !== "number" ||
       typeof imagePath !== "string"
     ) {
@@ -107,7 +136,7 @@ export default async function handler(
 
     try {
       await prisma.product.update({
-        where: { id: id },
+        where: { id: productId },
         data: {
           title: title,
           description: description,
@@ -131,10 +160,11 @@ export default async function handler(
     }
   } else if (req.method === "DELETE") {
     const { id } = req.query
+    const productId = Array.isArray(id) ? id[0] : id
 
     try {
       await prisma.product.delete({
-        where: { id: id },
+        where: { id: productId },
       })
       res.status(200).json({
         status: "success",
