@@ -8,7 +8,7 @@ import { CardItem } from "@/components"
 export async function getServerSideProps() {
   // Fetch data from the API
   const { data } = await apiClient.get(
-    process.env.NEXT_PUBLIC_API_PRODUCT_ENDPOINT || "",
+    process.env.NEXT_PUBLIC_API_PRODUCTS_ENDPOINT || "",
   )
 
   // Pass the data to the page as props
@@ -31,7 +31,11 @@ export default function Marketplace({ products }: any) {
 
   if (session) {
     return (
-      <MarketplaceLayout searchValue={searchQuery} setSearchValue={searchQuery}>
+      <MarketplaceLayout
+        searchValue={searchQuery}
+        setSearchValue={setSearchQuery}
+        session={session}
+      >
         <section className="w-full grid grid-cols-3 gap-4 overflow-y-auto">
           {products.map((product: any) => {
             return <CardItem item={product} key={product.id} />
@@ -41,13 +45,18 @@ export default function Marketplace({ products }: any) {
     )
   }
   return (
-    <button
-      className="border bg-cyan-500 text-white w-1/3 px-8 py-4 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-cyan-800 hover:border-cyan-800 transition delay-0 ease-in"
-      onClick={() => {
-        signIn()
-      }}
-    >
-      Gabung Sekarang
-    </button>
+    <div className="h-[82vh] flex flex-col justify-center items-center gap-4">
+      <h1 className="text-xl font-semibold">
+        Anda tidak memiliki akses. Silahkan login terlebih dahulu
+      </h1>
+      <button
+        className="border bg-cyan-500 text-white w-max px-8 py-4 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-cyan-800 hover:border-cyan-800 transition delay-0 ease-in"
+        onClick={() => {
+          signIn()
+        }}
+      >
+        Gabung Sekarang
+      </button>
+    </div>
   )
 }

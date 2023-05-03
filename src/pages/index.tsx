@@ -7,15 +7,15 @@ export default function Home() {
   const { data: session } = useSession()
 
   return (
-    <section className="flex flex-row justify-center items-center h-[82vh]">
-      <div className="w-1/2 justify-center items-center flex">
+    <section className="flex flex-col md:flex-row justify-center items-center h-[82vh]">
+      <div className="hidden md:flex w-1/2 justify-center items-center">
         <Image src={img1} alt="Illustrasi Pemancingan" />
       </div>
-      <div className="w-1/2 gap-4 h-[95%] flex flex-col justify-center px-16 rounded-lg bg-gradient-to-br from-cyan-50 to-cyan-100 text-gradient">
-        <h1 className="text-8xl font-black text-blue-800-to-blue-900 text-cyan-950">
+      <div className="w-full md:w-1/2 gap-4 h-[80%] flex flex-col justify-center px-16 rounded-lg bg-gradient-to-br from-cyan-50 to-cyan-100 text-gradient drop-shadow-md">
+        <h1 className="text-2xl lg lg:text-8xl font-black text-blue-800-to-blue-900 text-cyan-950">
           Fishindo
         </h1>
-        <p className="text-2xl font-light">
+        <p className="text-md lg:text-2xl font-light">
           Selamat datang di Fishindo! Kami adalah sumber informasi terkini
           seputar dunia perikanan, dengan fokus pada pemeliharaan ikan,
           budidaya, dan perdagangan ikan. Kami menyediakan artikel-artikel

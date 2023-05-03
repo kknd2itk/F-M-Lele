@@ -2,10 +2,12 @@ import { useState } from "react"
 import { useSession, signIn, signOut } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { GiHamburgerMenu } from "react-icons/gi"
 
 export const Navbar = () => {
   const router = useRouter()
   const [accountMenu, setAccountMenu] = useState(false)
+  const [sidebar, setSidebar] = useState(false)
   const { data: session } = useSession()
 
   return (
@@ -13,8 +15,26 @@ export const Navbar = () => {
       <Link href={"/"} className="font-black text-lg text-cyan-600">
         Fishindo
       </Link>
-      <div className="flex flex-row gap-6">
-        <ul className="flex flex-row gap-6 items-center font-medium">
+      <button
+        className="flex"
+        onClick={() => {
+          setSidebar(!sidebar)
+        }}
+      >
+        <GiHamburgerMenu />
+      </button>
+      <div
+        className={`${
+          sidebar ? "flex" : "hidden"
+        } lg:flex lg:flex-row gap-6 z-10`}
+      >
+        <ul className="absolute flex top-0 left-0 flex-col lg:flex-row gap-6 items-center font-medium bg-white w-full h-full">
+          <button
+            className="flex lg:hidden"
+            onClick={() => {
+              setSidebar(!sidebar)
+            }}
+          ></button>
           <Link
             href={"/"}
             className="border-2 border-transparent hover:border-b-cyan-300 py-2"
