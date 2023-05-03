@@ -3,6 +3,7 @@ import { useSession, signIn, signOut } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { GiHamburgerMenu } from "react-icons/gi"
+import { RxCrossCircled } from "react-icons/rx"
 
 export const Navbar = () => {
   const router = useRouter()
@@ -16,7 +17,7 @@ export const Navbar = () => {
         Fishindo
       </Link>
       <button
-        className="flex"
+        className={`${sidebar ? "hidden" : "flex"} scal lg:hidden`}
         onClick={() => {
           setSidebar(!sidebar)
         }}
@@ -28,27 +29,38 @@ export const Navbar = () => {
           sidebar ? "flex" : "hidden"
         } lg:flex lg:flex-row gap-6 z-10`}
       >
-        <ul className="absolute flex top-0 left-0 flex-col lg:flex-row gap-6 items-center font-medium bg-white w-full h-full">
+        <ul className="absolute flex top-0 left-0 flex-col lg:relative lg:flex-row gap-6 items-center justify-center font-medium bg-white w-full h-full">
           <button
-            className="flex lg:hidden"
+            className={`${sidebar ? "flex" : "hidden"} lg:hidden`}
             onClick={() => {
               setSidebar(!sidebar)
             }}
-          ></button>
+          >
+            <RxCrossCircled className="scale-150" />
+          </button>
           <Link
             href={"/"}
+            onClick={() => {
+              setSidebar(false)
+            }}
             className="border-2 border-transparent hover:border-b-cyan-300 py-2"
           >
             Beranda
           </Link>
           <Link
             href={"/marketplace"}
+            onClick={() => {
+              setSidebar(false)
+            }}
             className=" border-2 border-transparent hover:border-b-cyan-300 py-2"
           >
             Marketplace
           </Link>
           <Link
             href={"/forum"}
+            onClick={() => {
+              setSidebar(false)
+            }}
             className="border-2 border-transparent hover:border-b-cyan-300 py-2"
           >
             Forum
