@@ -49,7 +49,7 @@ export default function AddProductPage() {
         })
         .then(async (response) => {
           console.log(response)
-          if (response.status === 200) {
+          if (response) {
             router.push("/marketplace")
           }
         })
