@@ -8,6 +8,11 @@ export const CardItem = ({ item }: any) => {
     .from("fishindo-bucket")
     .getPublicUrl(item.imagePath)
 
+  const displayPrice = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  }).format(item.price)
+
   return (
     <div className="bg-gradient-to-br from-white to-slate-50 drop-shadow-sm w-full border rounded-md">
       <div className="w-full h-32">
@@ -26,14 +31,14 @@ export const CardItem = ({ item }: any) => {
             <p className="font-light truncate ">{item.description}</p>
           </div>
           <div className="flex justify-center items-center w-full">
-            <p className="font-bold text-end">Rp.{item.price}/kg</p>
+            <p className="font-bold text-end text-sm">{displayPrice}/kg</p>
           </div>
         </div>
         <Link
           href={`/marketplace/${item.id}`}
           className="border bg-cyan-500 text-white w-max px-3 py-1 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-cyan-800 hover:border-cyan-800 hover:bg-white transition delay-0 ease-in"
         >
-          View Item
+          Lihat Produk
         </Link>
       </div>
     </div>

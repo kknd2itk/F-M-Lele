@@ -87,7 +87,7 @@ export default function AddProductPage() {
 
   return (
     <>
-      <section className="px-96 overflow-y-auto h-[82vh] flex flex-col gap-6">
+      <section className="px-4 lg:px-96 overflow-y-auto h-[82vh] flex flex-col gap-6">
         <div className="flex justify-between items-center">
           <Link href={"/marketplace"} className="flex flex-row items-center">
             <BiChevronLeft />
@@ -95,13 +95,13 @@ export default function AddProductPage() {
           </Link>
           <h3 className="font-light">Add Product</h3>
         </div>
-        <div className="flex flex-row">
-          <h1 className="text-6xl font-black py-6">Tambah Produk</h1>
+        <div className="flex flex-col lg:flex-row">
+          <h1 className="text-xl lg:text-6xl font-black py-6">Tambah Produk</h1>
           <form
             className="flex flex-col w-full gap-4 pb-20"
             onSubmit={handleCreateProduct}
           >
-            <div className="flex flex-col text-lg gap-2">
+            <div className="flex flex-col text-md lg:text-lg gap-2">
               <label>Nama Produk</label>
               <input
                 placeholder="Isi nama produk"
@@ -115,7 +115,7 @@ export default function AddProductPage() {
                 </div>
               )}
             </div>
-            <div className="flex flex-col text-lg gap-2">
+            <div className="flex flex-col text-md lg:text-lg gap-2">
               <label>Deskripsi Produk</label>
               <textarea
                 placeholder="Isi deskripsi produk"
@@ -128,7 +128,7 @@ export default function AddProductPage() {
                 </div>
               )}
             </div>
-            <div className="flex flex-col text-lg gap-2">
+            <div className="flex flex-col text-md lg:text-lg gap-2">
               <label>Harga Produk (kg)</label>
               <input
                 placeholder="Isi harga produk"

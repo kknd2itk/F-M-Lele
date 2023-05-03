@@ -15,7 +15,7 @@ export default function Home() {
         <h1 className="text-2xl lg lg:text-8xl font-black text-blue-800-to-blue-900 text-cyan-950">
           Fishindo
         </h1>
-        <p className="text-md lg:text-2xl font-light">
+        <p className="text-xs sm:text-md lg:text-2xl font-light">
           Selamat datang di Fishindo! Kami adalah sumber informasi terkini
           seputar dunia perikanan, dengan fokus pada pemeliharaan ikan,
           budidaya, dan perdagangan ikan. Kami menyediakan artikel-artikel
@@ -25,13 +25,13 @@ export default function Home() {
         {session ? (
           <div className="my-6 space-x-4">
             <Link
-              className="border bg-cyan-500 text-white w-1/3 px-8 py-4 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-cyan-800 hover:border-cyan-800 transition delay-0 ease-in"
+              className="border bg-cyan-500 text-sm lg:text-md p-3 text-white w-max lg:px-8 lg:py-4 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-cyan-800 hover:border-cyan-800 transition delay-0 ease-in"
               href={"/marketplace"}
             >
               Marketplace
             </Link>
             <Link
-              className="border bg-cyan-500 text-white w-1/3 px-8 py-4 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-cyan-800 hover:border-cyan-800 transition delay-0 ease-in"
+              className="border bg-cyan-500 text-sm lg:text-md p-3 text-white w-max lg:px-8 lg:py-4 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-cyan-800 hover:border-cyan-800 transition delay-0 ease-in"
               href={"/forum"}
             >
               Forum
@@ -39,7 +39,7 @@ export default function Home() {
           </div>
         ) : (
           <button
-            className="border bg-cyan-500 text-white w-1/3 px-8 py-4 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-cyan-800 hover:border-cyan-800 transition delay-0 ease-in"
+            className="border bg-cyan-500 text-white w-max text-sm lg:text-md p-3 lg:px-8 lg:py-4 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-cyan-800 hover:border-cyan-800 transition delay-0 ease-in"
             onClick={() => {
               signIn()
             }}

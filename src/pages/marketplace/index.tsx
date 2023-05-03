@@ -36,7 +36,7 @@ export default function Marketplace({ products }: any) {
         setSearchValue={setSearchQuery}
         session={session}
       >
-        <section className="w-full grid grid-cols-3 gap-4 overflow-y-auto">
+        <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto">
           {products.map((product: any) => {
             return <CardItem item={product} key={product.id} />
           })}
@@ -45,7 +45,7 @@ export default function Marketplace({ products }: any) {
     )
   }
   return (
-    <div className="h-[82vh] flex flex-col justify-center items-center gap-4">
+    <div className="px-4 h-[82vh] flex flex-col justify-center items-center gap-4 text-center">
       <h1 className="text-xl font-semibold">
         Anda tidak memiliki akses. Silahkan login terlebih dahulu
       </h1>

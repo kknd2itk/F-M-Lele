@@ -73,7 +73,7 @@ export const Navbar = () => {
               }}
             >
               <h3 className="border border-cyan-800 text-cyan-800 px-6 py-3 rounded-md font-medium hover:bg-gradient-to-br hover:text-white hover:bg-cyan-500 transition delay-0 ease-in">
-                Hello, {session?.user?.name}
+                Hai, {session?.user?.name}
               </h3>
               <div
                 className={
