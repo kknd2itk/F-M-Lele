@@ -4,8 +4,8 @@ import { supabase } from "@/lib/supabase"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
 import { v4 as uuidv4 } from "uuid"
-import axios from "axios"
 import { HiOutlineUpload } from "react-icons/hi"
+import apiClient from "@/lib/axios"
 
 export default function AddProductPage() {
   const { data: session } = useSession()
@@ -38,8 +38,8 @@ export default function AddProductPage() {
         console.error(error)
       }
 
-      await axios
-        .post("http://localhost:3000/api/products", {
+      await apiClient
+        .post(process.env.API_PRODUCT_ENDPOINT || "", {
           title: title,
           description: description,
           price: parseInt(price),
@@ -49,6 +49,7 @@ export default function AddProductPage() {
         })
         .then(async (response) => {
           console.log(response)
+          router.push("/marketplace")
         })
         .catch((error) => {
           setErrorMessage(error)
