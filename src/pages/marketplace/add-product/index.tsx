@@ -139,7 +139,7 @@ export default function AddProductPage() {
               />
               {price && (
                 <div className="text-xs font-light w-1/2 truncate">
-                  Akan ditampilkan seperti: Rp.
+                  Akan ditampilkan seperti: 
                   {displayPrice}/kg
                 </div>
               )}
