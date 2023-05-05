@@ -61,7 +61,7 @@ export default function ProductDetail({ product, user }: any) {
           <h1 className="text-3xl font-bold">Detail Produk</h1>
           <div className="p-3 bg-slate-50 drop-shadow-sm space-y-1 rounded-md">
             <h2 className="font-medium text-lg">{product.title}</h2>
-            <h1 className="font-black text-3xl">Rp.{displayPrice}/kg</h1>
+            <h1 className="font-black text-3xl">{displayPrice}/kg</h1>
           </div>
           <div className="p-3 bg-slate-50 drop-shadow-sm space-y-1 rounded-md">
             <h2 className="font-bold text-lg">Deskripsi Produk</h2>
