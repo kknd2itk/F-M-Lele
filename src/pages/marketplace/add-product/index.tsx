@@ -139,7 +139,7 @@ export default function AddProductPage() {
               />
               {price && (
                 <div className="text-xs font-light w-1/2 truncate">
-                  Akan ditampilkan seperti: 
+                  Akan ditampilkan seperti:
                   {displayPrice}/kg
                 </div>
               )}
@@ -151,7 +151,7 @@ export default function AddProductPage() {
                 type="number"
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 className="border rounded-md px-4 py-2"
-                pattern="[1-9][0-9]{0,11}"
+                pattern="[1-9]{0,11}"
               />
               {phoneNumber && (
                 <div className="text-xs font-light w-1/2 truncate">

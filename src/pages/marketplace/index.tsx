@@ -19,11 +19,11 @@ export async function getServerSideProps() {
   }
 }
 
-export default function Marketplace({ products }: any) {
+export default function Marketplace({ products: initialProducts }: any) {
   const { data: session } = useSession()
 
   const [searchQuery, setSearchQuery] = useState("")
-  const [filteredProducts, setFilteredProducts] = useState([])
+  const [filteredProducts, setFilteredProducts] = useState(initialProducts)
 
   const handleQueryChange = (e: any) => {
     const newQuery = e.target.value
@@ -38,7 +38,6 @@ export default function Marketplace({ products }: any) {
   if (session) {
     return (
       <MarketplaceLayout
-        searchQuery={searchQuery}
         session={session}
         filteredProducts={filteredProducts}
         handleQueryChange={handleQueryChange}

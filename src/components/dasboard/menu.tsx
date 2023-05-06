@@ -3,15 +3,15 @@ import { signOut } from "next-auth/react"
 
 export const DashboardMenu = () => {
   return (
-    <div className="flex flex-col h-2/3 p-6 shadow-md rounded-md gap-3">
+    <div className="flex flex-col h-2/3 p-6 shadow-md rounded-md gap-3 w-max">
       <Link
-        href={"/dashboard/product"}
+        href={"/dashboard/products"}
         className="p-3 hover:bg-cyan-500 hover:text-white rounded-md"
       >
         Product Management
       </Link>
       <Link
-        href={"/dashboard/user"}
+        href={"/dashboard/users"}
         className="p-3 hover:bg-cyan-500 hover:text-white rounded-md"
       >
         User Management
