@@ -23,21 +23,28 @@ export default function Marketplace({ products }: any) {
   const { data: session } = useSession()
 
   const [searchQuery, setSearchQuery] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState(null)
+  const [filteredProducts, setFilteredProducts] = useState([])
 
-  const handleSearchQueryChange = (e: any) => {
-    setSearchQuery(e.target.value)
+  const handleQueryChange = (e: any) => {
+    const newQuery = e.target.value
+    setSearchQuery(newQuery)
+
+    const filteredData = products.filter((product: any) =>
+      product.title.toLowerCase().includes(newQuery.toLowerCase()),
+    )
+    setFilteredProducts(filteredData)
   }
 
   if (session) {
     return (
       <MarketplaceLayout
-        searchValue={searchQuery}
-        setSearchValue={setSearchQuery}
+        searchQuery={searchQuery}
         session={session}
+        filteredProducts={filteredProducts}
+        handleQueryChange={handleQueryChange}
       >
         <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto">
-          {products.map((product: any) => {
+          {filteredProducts.map((product: any) => {
             return <CardItem item={product} key={product.id} />
           })}
         </section>

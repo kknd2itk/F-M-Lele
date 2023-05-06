@@ -1,6 +1,6 @@
 import { DashboardMenu } from "@/components/dasboard/menu"
 
-export const DashboardLayout = ({ children }: any) => {
+export const DashboardLayout = ({ children, session }: any) => {
   return (
     <div className="mx-16 px-4 flex flex-row gap-4 h-[82vh]">
       <DashboardMenu />

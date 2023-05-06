@@ -23,7 +23,7 @@ export const DashboardMenu = () => {
         Profile
       </Link>
       <button
-        className="bg-red-500 w-11/12 text-white p-3 rounded-lg font-medium border border-red-500 hover:bg-white hover:text-red-500"
+        className="bg-red-500 w-full text-white p-3 rounded-lg font-medium border border-red-500 hover:bg-white hover:text-red-500"
         onClick={() => {
           signOut()
         }}
