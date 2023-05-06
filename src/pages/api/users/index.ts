@@ -47,6 +47,33 @@ export default async function handler(
         error: error,
       })
     }
+  } else if (req.method === "PUT") {
+    const { id } = req.query
+    const userId = Array.isArray(id) ? id[0] : id
+
+    try {
+      // Get the request body
+      const { role } = req.body
+
+      // Update the user in the database
+      const updatedUser = await prisma.user.update({
+        where: { id: userId },
+        data: { role },
+      })
+
+      res.status(200).json({
+        status: "success",
+        message: "User has been updated",
+        data: updatedUser,
+      })
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({
+        status: "failed",
+        message: "Failed to update user",
+        error: error,
+      })
+    }
   } else if (req.method === "DELETE") {
     const { id } = req.query
     const userId = Array.isArray(id) ? id[0] : id
@@ -67,5 +94,10 @@ export default async function handler(
         error: error,
       })
     }
+  } else {
+    res.status(405).json({
+      status: "failed",
+      message: `Method ${req.method} Not Allowed`,
+    })
   }
 }

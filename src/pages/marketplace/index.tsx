@@ -29,7 +29,7 @@ export default function Marketplace({ products: initialProducts }: any) {
     const newQuery = e.target.value
     setSearchQuery(newQuery)
 
-    const filteredData = products.filter((product: any) =>
+    const filteredData = initialProducts.filter((product: any) =>
       product.title.toLowerCase().includes(newQuery.toLowerCase()),
     )
     setFilteredProducts(filteredData)
@@ -50,6 +50,7 @@ export default function Marketplace({ products: initialProducts }: any) {
       </MarketplaceLayout>
     )
   }
+
   return (
     <div className="px-4 h-[82vh] flex flex-col justify-center items-center gap-4 text-center">
       <h1 className="text-xl font-semibold">

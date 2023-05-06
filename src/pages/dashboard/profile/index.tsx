@@ -1,5 +1,6 @@
 import apiClient from "@/lib/axios"
 import { DashboardLayout } from "@/layout"
+import { useSession, signIn } from "next-auth/react"
 
 export async function getServerSideProps() {
   // Fetch data from the API
@@ -16,32 +17,29 @@ export async function getServerSideProps() {
 }
 
 export default function Profile({ users }: any) {
-  console.log(users)
+  const { data: session } = useSession()
+
+  if (session) {
+    return (
+      <DashboardLayout>
+        <section className="h-full w-full"></section>
+      </DashboardLayout>
+    )
+  }
 
   return (
-    <DashboardLayout>
-      <table>
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Nama</th>
-            <th>Role</th>
-            <th>Product</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user: any) => {
-            return (
-              <tr key={user.id}>
-                <th>{user.email}</th>
-                <th>{user.name}</th>
-                <th>{user.role}</th>
-                <th>{user.email}</th>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
-    </DashboardLayout>
+    <div className="px-4 h-[82vh] flex flex-col justify-center items-center gap-4 text-center">
+      <h1 className="text-xl font-semibold">
+        Anda tidak memiliki akses. Silahkan login terlebih dahulu
+      </h1>
+      <button
+        className="border bg-cyan-500 text-white w-max px-8 py-4 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-cyan-800 hover:border-cyan-800 transition delay-0 ease-in"
+        onClick={() => {
+          signIn()
+        }}
+      >
+        Gabung Sekarang
+      </button>
+    </div>
   )
 }

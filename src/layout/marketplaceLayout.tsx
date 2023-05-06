@@ -1,12 +1,14 @@
 import { FilterBox } from "@/components"
+import { useSession } from "next-auth/react"
 import Link from "next/link"
 
 export const MarketplaceLayout = ({
   searchQuery,
   handleQueryChange,
-  session,
   children,
 }: any) => {
+  const { data: session } = useSession()
+
   return (
     <div className="lg:mx-16 px-6 flex flex-row gap-4 h-[82vh]">
       <div className="hidden lg:flex w-1/4 h-full mb-8">
@@ -20,15 +22,22 @@ export const MarketplaceLayout = ({
             className="px-6 py-3 border w-full lg:w-1/3 rounded-md"
             placeholder="Cari produk"
           />
-          {session?.user?.role === "SELLER" ||
-            (session?.user?.role === "ADMIN" && (
-              <Link
-                href={"/marketplace/add-product"}
-                className="border bg-cyan-500 text-white w-full lg:w-max px-6 py-3 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-cyan-800 hover:border-cyan-800 transition delay-0 ease-in hover:bg-white text-center"
-              >
-                Tambah Produk
-              </Link>
-            ))}
+          {session?.user?.role === "SELLER" && (
+            <Link
+              href={"/marketplace/add-product"}
+              className="border bg-cyan-500 text-white w-full lg:w-max px-6 py-3 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-cyan-800 hover:border-cyan-800 transition delay-0 ease-in hover:bg-white text-center"
+            >
+              Tambah Produk
+            </Link>
+          )}
+          {session?.user?.role === "ADMIN" && (
+            <Link
+              href={"/marketplace/add-product"}
+              className="border bg-cyan-500 text-white w-full lg:w-max px-6 py-3 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-cyan-800 hover:border-cyan-800 transition delay-0 ease-in hover:bg-white text-center"
+            >
+              Tambah Produk
+            </Link>
+          )}
         </div>
         <div className="overflow-y-auto h-full w-full">{children}</div>
       </div>

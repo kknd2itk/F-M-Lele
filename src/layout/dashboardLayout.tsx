@@ -6,7 +6,7 @@ export const DashboardLayout = ({ children, session }: any) => {
       <div className="w-1/3">
         <DashboardMenu />
       </div>
-      <div className="flex flex-col h-full w-2/3">{children}</div>
+      <div className="flex flex-col h-full w-full">{children}</div>
     </div>
   )
 }

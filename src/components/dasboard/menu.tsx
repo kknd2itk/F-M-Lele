@@ -1,21 +1,41 @@
 import Link from "next/link"
-import { signOut } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 
 export const DashboardMenu = () => {
+  const { data: session } = useSession()
+
   return (
     <div className="flex flex-col h-2/3 p-6 shadow-md rounded-md gap-3 w-max">
       <Link
-        href={"/dashboard/products"}
+        href={"/dashboard"}
         className="p-3 hover:bg-cyan-500 hover:text-white rounded-md"
       >
-        Product Management
+        Dashboard
       </Link>
-      <Link
-        href={"/dashboard/users"}
-        className="p-3 hover:bg-cyan-500 hover:text-white rounded-md"
-      >
-        User Management
-      </Link>
+      {session?.user?.role === "SELLER" && (
+        <Link
+          href={"/dashboard/products"}
+          className="p-3 hover:bg-cyan-500 hover:text-white rounded-md"
+        >
+          Product Management
+        </Link>
+      )}
+      {session?.user?.role === "ADMIN" && (
+        <Link
+          href={"/dashboard/products"}
+          className="p-3 hover:bg-cyan-500 hover:text-white rounded-md"
+        >
+          Product Management
+        </Link>
+      )}
+      {session?.user?.role === "ADMIN" && (
+        <Link
+          href={"/dashboard/users"}
+          className="p-3 hover:bg-cyan-500 hover:text-white rounded-md"
+        >
+          User Management
+        </Link>
+      )}
       <Link
         href={"/dashboard/profile"}
         className="p-3 hover:bg-cyan-500 hover:text-white rounded-md"
