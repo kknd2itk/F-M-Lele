@@ -2,7 +2,7 @@ import apiClient from "@/lib/axios"
 import { DashboardLayout } from "@/layout"
 import { signIn, useSession } from "next-auth/react"
 import { HiPencil, HiTrash } from "react-icons/hi"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Toaster } from "react-hot-toast"
 import { notify } from "@/components/toast"
 import { useRouter } from "next/router"
@@ -26,10 +26,32 @@ export default function UserManagement({ products: initialProducts }: any) {
   const [datas, setDatas] = useState(initialProducts)
   const [isDeleting, setIsDeleting] = useState(false)
 
+  useEffect(() => {
+    const fetchProductsWithSeller = async () => {
+      const productsWithSeller = await Promise.all(
+        initialProducts.map(async (product: any) => {
+          const seller = await apiClient.get(
+            `${process.env.NEXT_PUBLIC_API_USERS_ENDPOINT}?id=${product.sellerId}`,
+          )
+
+          return {
+            ...product,
+            sellerName: seller?.data?.name,
+          }
+        }),
+      )
+      setDatas(productsWithSeller)
+    }
+    fetchProductsWithSeller()
+  }, [initialProducts])
+
   const handleDeleteProduct = async (productId: number) => {
     setIsDeleting(true)
     try {
-      await deleteProduct(productId)
+      await apiClient.delete(
+        `${process.env.NEXT_PUBLIC_API_PRODUCTS_ENDPOINT}?id=${productId}`,
+      )
+
       setDatas((prevProducts: any) =>
         prevProducts.filter((product: any) => product.id !== productId),
       )
@@ -46,12 +68,6 @@ export default function UserManagement({ products: initialProducts }: any) {
     } finally {
       setIsDeleting(false)
     }
-  }
-
-  const deleteProduct = async (productId: number) => {
-    await apiClient.delete(
-      `${process.env.NEXT_PUBLIC_API_PRODUCTS_ENDPOINT}?id=${productId}`,
-    )
   }
 
   if (session) {
@@ -88,38 +104,36 @@ export default function UserManagement({ products: initialProducts }: any) {
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
-                        {datas.map((data: any) => {
-                          return (
-                            <tr key={data.id}>
-                              <td className="px-2 py-4 whitespace-nowrap truncate">
-                                {data.title}
-                              </td>
-                              <td className="px-2 py-4 whitespace-nowrap truncate">
-                                {data.description}
-                              </td>
-                              <td className="px-2 py-4 whitespace-nowrap truncate">
-                                {data.price}
-                              </td>
-                              <td className="px-2 py-4 whitespace-nowrap truncate">
-                                {data.phoneNumber}
-                              </td>
-                              <td className="px-2 py-4 whitespace-nowrap truncate">
-                                {data.sellerId}
-                              </td>
-                              <td className="px-2 py-4 whitespace-nowrap flex justify-center items-center gap-3">
-                                <button className="text-white bg-yellow-500 rounded-md p-2 hover:text-yellow-500 hover:bg-white transition delay-0 ease-out">
-                                  <HiPencil />
-                                </button>
-                                <button
-                                  className="text-white bg-red-500 rounded-md p-2 hover:text-red-500 hover:bg-white transition delay-0 ease-out"
-                                  onClick={() => handleDeleteProduct(data.id)}
-                                >
-                                  <HiTrash />
-                                </button>
-                              </td>
-                            </tr>
-                          )
-                        })}
+                        {datas.map((data: any) => (
+                          <tr key={data.id}>
+                            <td className="px-2 py-4 whitespace-nowrap truncate">
+                              {data.title}
+                            </td>
+                            <td className="px-2 py-4 whitespace-nowrap truncate">
+                              {data.description}
+                            </td>
+                            <td className="px-2 py-4 whitespace-nowrap truncate">
+                              {data.price}
+                            </td>
+                            <td className="px-2 py-4 whitespace-nowrap truncate">
+                              {data.phoneNumber}
+                            </td>
+                            <td className="px-2 py-4 whitespace-nowrap truncate">
+                              {data.sellerName}
+                            </td>
+                            <td className="px-2 py-4 whitespace-nowrap flex justify-center items-center gap-3">
+                              <button className="text-white bg-yellow-500 rounded-md p-2 hover:text-yellow-500 hover:bg-white transition delay-0 ease-out">
+                                <HiPencil />
+                              </button>
+                              <button
+                                className="text-white bg-red-500 rounded-md p-2 hover:text-red-500 hover:bg-white transition delay-0 ease-out"
+                                onClick={() => handleDeleteProduct(data.id)}
+                              >
+                                <HiTrash />
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>
