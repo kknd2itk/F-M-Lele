@@ -58,52 +58,76 @@ export default function UserManagement({ products: initialProducts }: any) {
     return (
       <>
         <DashboardLayout>
-          {session && session?.user?.role === "ADMIN" && (
-            <div className="w-full h-full overflow-y-auto space-y-4">
-              <h1 className="text-2xl font-bold">Manajemen Produk</h1>
-              <table className="w-full table-fixed">
-                <thead className="border">
-                  <tr className="border">
-                    <th className="border w-1/6 p-2">Nama Produk</th>
-                    <th className="border w-1/6 p-2">Deskripsi Produk</th>
-                    <th className="border w-1/6 p-2">Harga</th>
-                    <th className="border w-1/6 p-2">No. Telpon</th>
-                    <th className="border w-1/6 p-2">Penjual</th>
-                    <th className="border w-1/6 p-2">Action</th>
-                  </tr>
-                </thead>
-                <tbody className="font-regular">
-                  {datas.map((data: any) => {
-                    return (
-                      <tr key={data.id} className="font-regular">
-                        <td className="border truncate p-2">{data.title}</td>
-                        <td className="border truncate p-2">
-                          {data.description}
-                        </td>
-                        <td className="border truncate p-2">{data.price}</td>
-                        <td className="border truncate p-2">
-                          {data.phoneNumber}
-                        </td>
-                        <td className="border truncate p-2">{data.sellerId}</td>
-                        <td className="border truncate p-2 flex justify-center items-center gap-3">
-                          <button className="text-white bg-yellow-500 rounded-md p-2 hover:text-yellow-500 hover:bg-white transition delay-0 ease-out">
-                            <HiPencil />
-                          </button>
-                          <button
-                            className="text-white bg-red-500 rounded-md p-2 hover:text-red-500 hover:bg-white transition delay-0 ease-out"
-                            onClick={() => handleDeleteProduct(data.id)}
-                          >
-                            <HiTrash />
-                          </button>
-                        </td>
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
+          {session?.user?.role === "ADMIN" && (
+            <div className="w-full h-full overflow-x-auto">
+              <div className="w-full mx-auto py-3 px-4 sm:px-6 lg:px-8">
+                <h1 className="text-2xl font-bold">Manajemen Produk</h1>
+                <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mt-4">
+                  <div className="overflow-x-auto overflow-y-auto h-[60vh]">
+                    <table className="max-w-full divide-y divide-gray-200">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/6">
+                            Nama Produk
+                          </th>
+                          <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/6">
+                            Deskripsi Produk
+                          </th>
+                          <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/6">
+                            Harga
+                          </th>
+                          <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/6">
+                            No. Telpon
+                          </th>
+                          <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/6">
+                            Penjual
+                          </th>
+                          <th className="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-1/6">
+                            Action
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white divide-y divide-gray-200">
+                        {datas.map((data: any) => {
+                          return (
+                            <tr key={data.id}>
+                              <td className="px-2 py-4 whitespace-nowrap truncate">
+                                {data.title}
+                              </td>
+                              <td className="px-2 py-4 whitespace-nowrap truncate">
+                                {data.description}
+                              </td>
+                              <td className="px-2 py-4 whitespace-nowrap truncate">
+                                {data.price}
+                              </td>
+                              <td className="px-2 py-4 whitespace-nowrap truncate">
+                                {data.phoneNumber}
+                              </td>
+                              <td className="px-2 py-4 whitespace-nowrap truncate">
+                                {data.sellerId}
+                              </td>
+                              <td className="px-2 py-4 whitespace-nowrap flex justify-center items-center gap-3">
+                                <button className="text-white bg-yellow-500 rounded-md p-2 hover:text-yellow-500 hover:bg-white transition delay-0 ease-out">
+                                  <HiPencil />
+                                </button>
+                                <button
+                                  className="text-white bg-red-500 rounded-md p-2 hover:text-red-500 hover:bg-white transition delay-0 ease-out"
+                                  onClick={() => handleDeleteProduct(data.id)}
+                                >
+                                  <HiTrash />
+                                </button>
+                              </td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
-          {session && session?.user?.role === "SELLER" && (
+          {session?.user?.role === "SELLER" && (
             <div className="w-full h-full overflow-y-auto space-y-4">
               <h1 className="text-2xl font-bold">Manajemen Produk</h1>
               <table className="w-full table-fixed">
@@ -148,7 +172,7 @@ export default function UserManagement({ products: initialProducts }: any) {
               </table>
             </div>
           )}
-          {session && session?.user?.role === "USER" && (
+          {session?.user?.role === "USER" && (
             <div className="px-4 h-[82vh] flex flex-col justify-center items-center gap-4 text-center">
               <h1 className="text-xl font-semibold">
                 Anda tidak memiliki akses. Kembali ke Dashboard

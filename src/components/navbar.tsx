@@ -12,12 +12,12 @@ export const Navbar = () => {
   const { data: session } = useSession()
 
   return (
-    <nav className="flex justify-between items-center mx-16 px-4 h-[10vh]">
+    <nav className="flex justify-between items-center md:mx-16 px-4 h-[10vh]">
       <Link href={"/"} className="font-black text-lg text-cyan-600">
         Fishindo
       </Link>
       <button
-        className={`${sidebar ? "hidden" : "flex"} scal lg:hidden`}
+        className={`${sidebar ? "hidden" : "flex"} md:hidden`}
         onClick={() => {
           setSidebar(!sidebar)
         }}
@@ -27,9 +27,9 @@ export const Navbar = () => {
       <div
         className={`${
           sidebar ? "flex" : "hidden"
-        } lg:flex lg:flex-row gap-6 z-10`}
+        } md:flex md:flex-row gap-6 z-10`}
       >
-        <ul className="absolute flex top-0 left-0 flex-col lg:relative lg:flex-row gap-6 items-center justify-center font-medium bg-white w-full h-full">
+        <ul className="absolute flex top-0 left-0 flex-col md:relative md:flex-row gap-6 items-center justify-center font-medium bg-white w-full h-full">
           <button
             className={`${sidebar ? "flex" : "hidden"} lg:hidden`}
             onClick={() => {

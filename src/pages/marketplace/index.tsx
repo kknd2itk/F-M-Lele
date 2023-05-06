@@ -42,7 +42,7 @@ export default function Marketplace({ products: initialProducts }: any) {
         filteredProducts={filteredProducts}
         handleQueryChange={handleQueryChange}
       >
-        <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto">
+        <section className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto">
           {filteredProducts.map((product: any) => {
             return <CardItem item={product} key={product.id} />
           })}
