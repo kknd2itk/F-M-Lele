@@ -10,6 +10,7 @@ import apiClient from "@/lib/axios"
 import { Toaster } from "react-hot-toast"
 import { notify } from "@/components/toast"
 import Link from "next/link"
+import { AiOutlineWhatsApp } from "react-icons/ai"
 
 export default function AddProductPage() {
   const { data: session } = useSession()
@@ -319,9 +320,18 @@ export default function AddProductPage() {
           </section>
         )}
         {session?.user?.role === "USER" && (
-          <div className="h-[82vh] flex justify-center items-center">
-            Anda tidak berhak mengakses halaman ini
-          </div>
+          <>
+            <h1 className="text-xl font-semibold">
+              Anda tidak memiliki akses. Ingin menjadi penjual? Hubungi Admin
+            </h1>
+            <Link
+              href={`https://wa.me/6281251810907?text=Halo%20pak/bu,%20saya%20tertarik%20untuk%20menjadi%20Penjual.%20apa%20saja%20yang%20harus%20saya%20siapkan%20`}
+              className="text-white border border-green-500 bg-green-500 flex justify-center items-center gap-3 py-3 rounded-md hover:text-green-500 hover:bg-white transition delay-0 ease-in-out"
+            >
+              <AiOutlineWhatsApp />
+              Whatsapp
+            </Link>
+          </>
         )}
         <Toaster />
       </>

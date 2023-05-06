@@ -104,72 +104,76 @@ export default function UserManagement({ users: initialUsers }: any) {
                     </tr>
                   </thead>
                   <tbody className="font-regular">
-                    {usersData.map((user: any) => {
-                      return (
-                        <tr key={user.id} className="font-regular">
-                          <td className="border truncate p-2">{user.email}</td>
-                          <td className="border truncate p-2">{user.name}</td>
-                          <td className="border truncate p-2 text-center">
-                            {getProductCount(user.id)}
-                          </td>
-                          <td className="border truncate p-2 flex gap-2">
-                            <select
-                              value={user.role}
-                              onChange={(e) =>
-                                handleRoleChange(e, usersData.indexOf(user))
-                              }
-                              className="bg-white border border-gray-300 p-2 rounded-md flex-grow"
-                            >
-                              <option value="USER">User</option>
-                              <option value="SELLER">Seller</option>
-                            </select>
-                            <button
-                              className="text-white bg-green-500 rounded-md p-2 hover:text-green-500 hover:bg-white transition delay-0 ease-out"
-                              onClick={async () => {
-                                try {
-                                  const updatedUser = await apiClient.put(
-                                    `${process.env.NEXT_PUBLIC_API_USERS_ENDPOINT}?id=${user.id}`,
-                                    { role: role },
-                                  )
-                                  setUsersData((prevUsers: any) =>
-                                    prevUsers.map((u: any) =>
-                                      u.id === updatedUser.data.id
-                                        ? updatedUser.data
-                                        : u,
-                                    ),
-                                  )
-                                  notify({
-                                    title: "Berhasil",
-                                    message: "Data berhasil diperbaharui",
-                                  })
-                                } catch (error) {
-                                  console.error(error)
-                                  notify({
-                                    title: "Gagal",
-                                    message: "Data gagal dihapus",
-                                  })
-                                } finally {
-                                  setRole("")
+                    {usersData
+                      .filter((user: any) => user.role !== "ADMIN")
+                      .map((user: any) => {
+                        return (
+                          <tr key={user.id} className="font-regular">
+                            <td className="border truncate p-2">
+                              {user.email}
+                            </td>
+                            <td className="border truncate p-2">{user.name}</td>
+                            <td className="border truncate p-2 text-center">
+                              {getProductCount(user.id)}
+                            </td>
+                            <td className="border truncate p-2 flex gap-2">
+                              <select
+                                value={user.role}
+                                onChange={(e) =>
+                                  handleRoleChange(e, usersData.indexOf(user))
                                 }
-                              }}
-                            >
-                              <MdSell />
-                            </button>
-                          </td>
-                          <td className="border truncate p-2 text-center space-x-2">
-                            <button className="text-white bg-yellow-500 rounded-md p-2 hover:text-yellow-500 hover:bg-white transition delay-0 ease-out">
-                              <HiPencil />
-                            </button>
-                            <button
-                              className="text-white bg-red-500 rounded-md p-2 hover:text-red-500 hover:bg-white transition delay-0 ease-out"
-                              onClick={() => handleDeleteUser(user.id)}
-                            >
-                              <HiTrash />
-                            </button>
-                          </td>
-                        </tr>
-                      )
-                    })}
+                                className="bg-white border border-gray-300 p-2 rounded-md flex-grow"
+                              >
+                                <option value="USER">User</option>
+                                <option value="SELLER">Seller</option>
+                              </select>
+                              <button
+                                className="text-white bg-green-500 rounded-md p-2 hover:text-green-500 hover:bg-white transition delay-0 ease-out"
+                                onClick={async () => {
+                                  try {
+                                    const updatedUser = await apiClient.put(
+                                      `${process.env.NEXT_PUBLIC_API_USERS_ENDPOINT}?id=${user.id}`,
+                                      { role: role },
+                                    )
+                                    setUsersData((prevUsers: any) =>
+                                      prevUsers.map((u: any) =>
+                                        u.id === updatedUser.data.id
+                                          ? updatedUser.data
+                                          : u,
+                                      ),
+                                    )
+                                    notify({
+                                      title: "Berhasil",
+                                      message: "Data berhasil diperbaharui",
+                                    })
+                                  } catch (error) {
+                                    console.error(error)
+                                    notify({
+                                      title: "Gagal",
+                                      message: "Data gagal dihapus",
+                                    })
+                                  } finally {
+                                    setRole("")
+                                  }
+                                }}
+                              >
+                                <MdSell />
+                              </button>
+                            </td>
+                            <td className="border truncate p-2 text-center space-x-2">
+                              <button className="text-white bg-yellow-500 rounded-md p-2 hover:text-yellow-500 hover:bg-white transition delay-0 ease-out">
+                                <HiPencil />
+                              </button>
+                              <button
+                                className="text-white bg-red-500 rounded-md p-2 hover:text-red-500 hover:bg-white transition delay-0 ease-out"
+                                onClick={() => handleDeleteUser(user.id)}
+                              >
+                                <HiTrash />
+                              </button>
+                            </td>
+                          </tr>
+                        )
+                      })}
                   </tbody>
                 </table>
               </div>
