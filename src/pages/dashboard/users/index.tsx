@@ -90,92 +90,118 @@ export default function UserManagement({ users: initialUsers }: any) {
       <>
         <DashboardLayout>
           {session?.user?.role === "ADMIN" && (
-            <div className="w-full h-full space-y-4">
-              <h1 className="text-2xl font-bold">Manajemen User</h1>
-              <div className="h-full overflow-y-auto">
-                <table className="w-full table-fixed">
-                  <thead className="border">
-                    <tr className="border">
-                      <th className="border w-1/5 p-2">Email</th>
-                      <th className="border w-1/5 p-2">Nama</th>
-                      <th className="border w-1/5 p-2">Role</th>
-                      <th className="border w-1/5 p-2">Product</th>
-                      <th className="border w-1/5 p-2">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody className="font-regular">
-                    {usersData
-                      .filter((user: any) => user.role !== "ADMIN")
-                      .map((user: any) => {
-                        return (
-                          <tr key={user.id} className="font-regular">
-                            <td className="border truncate p-2">
-                              {user.email}
-                            </td>
-                            <td className="border truncate p-2">{user.name}</td>
-                            <td className="border truncate p-2 text-center">
-                              {getProductCount(user.id)}
-                            </td>
-                            <td className="border truncate p-2 flex gap-2">
-                              <select
-                                value={user.role}
-                                onChange={(e) =>
-                                  handleRoleChange(e, usersData.indexOf(user))
-                                }
-                                className="bg-white border border-gray-300 p-2 rounded-md flex-grow"
-                              >
-                                <option value="USER">User</option>
-                                <option value="SELLER">Seller</option>
-                              </select>
-                              <button
-                                className="text-white bg-green-500 rounded-md p-2 hover:text-green-500 hover:bg-white transition delay-0 ease-out"
-                                onClick={async () => {
-                                  try {
-                                    const updatedUser = await apiClient.put(
-                                      `${process.env.NEXT_PUBLIC_API_USERS_ENDPOINT}?id=${user.id}`,
-                                      { role: role },
-                                    )
-                                    setUsersData((prevUsers: any) =>
-                                      prevUsers.map((u: any) =>
-                                        u.id === updatedUser.data.id
-                                          ? updatedUser.data
-                                          : u,
-                                      ),
-                                    )
-                                    notify({
-                                      title: "Berhasil",
-                                      message: "Data berhasil diperbaharui",
-                                    })
-                                  } catch (error) {
-                                    console.error(error)
-                                    notify({
-                                      title: "Gagal",
-                                      message: "Data gagal dihapus",
-                                    })
-                                  } finally {
-                                    setRole("")
-                                  }
-                                }}
-                              >
-                                <MdSell />
-                              </button>
-                            </td>
-                            <td className="border truncate p-2 text-center space-x-2">
-                              <button className="text-white bg-yellow-500 rounded-md p-2 hover:text-yellow-500 hover:bg-white transition delay-0 ease-out">
-                                <HiPencil />
-                              </button>
-                              <button
-                                className="text-white bg-red-500 rounded-md p-2 hover:text-red-500 hover:bg-white transition delay-0 ease-out"
-                                onClick={() => handleDeleteUser(user.id)}
-                              >
-                                <HiTrash />
-                              </button>
+            <div className="w-full h-full overflow-x-auto">
+              <div className="w-full mx-auto py-3 px-4 sm:px-6 lg:px-8">
+                <h1 className="text-2xl font-bold">Manajemen User</h1>
+                <div className="shadow border-b border-gray-200 sm:rounded-lg mt-4">
+                  <div className="overflow-x-auto overflow-y-auto h-[60vh]">
+                    <table className="max-w-full divide-y divide-gray-200">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/5">
+                            Email
+                          </th>
+                          <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/5">
+                            Nama
+                          </th>
+                          <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/5">
+                            Role
+                          </th>
+                          <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/5">
+                            Product
+                          </th>
+                          <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/5">
+                            Action
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white divide-y divide-gray-200">
+                        {usersData
+                          .filter((user: any) => user.role !== "ADMIN")
+                          .map((user: any) => {
+                            return (
+                              <tr key={user.id}>
+                                <td className="px-2 py-4 whitespace-nowrap truncate">
+                                  {user.email}
+                                </td>
+                                <td className="px-2 py-4 whitespace-nowrap truncate">
+                                  {user.name}
+                                </td>
+                                <td className="px-2 py-4 whitespace-nowrap truncate">
+                                  {getProductCount(user.id)}
+                                </td>
+                                <td className="px-2 py-4 whitespace-nowrap truncate flex gap-2">
+                                  <select
+                                    value={user.role}
+                                    onChange={(e) =>
+                                      handleRoleChange(
+                                        e,
+                                        usersData.indexOf(user),
+                                      )
+                                    }
+                                    className="bg-white border border-gray-300 p-2 rounded-md flex-grow"
+                                  >
+                                    <option value="USER">User</option>
+                                    <option value="SELLER">Seller</option>
+                                  </select>
+                                  <button
+                                    className="text-white bg-green-500 rounded-md p-2 hover:text-green-500 hover:bg-white transition delay-0 ease-out"
+                                    onClick={async () => {
+                                      try {
+                                        const updatedUser = await apiClient.put(
+                                          `${process.env.NEXT_PUBLIC_API_USERS_ENDPOINT}?id=${user.id}`,
+                                          { role: role },
+                                        )
+                                        setUsersData((prevUsers: any) =>
+                                          prevUsers.map((u: any) =>
+                                            u.id === updatedUser.data.id
+                                              ? updatedUser.data
+                                              : u,
+                                          ),
+                                        )
+                                        notify({
+                                          title: "Berhasil",
+                                          message: "Data berhasil diperbaharui",
+                                        })
+                                      } catch (error) {
+                                        console.error(error)
+                                        notify({
+                                          title: "Gagal",
+                                          message: "Data gagal dihapus",
+                                        })
+                                      } finally {
+                                        setRole("")
+                                      }
+                                    }}
+                                  >
+                                    <MdSell />
+                                  </button>
+                                </td>
+                                <td className="px-2 py-4 whitespace-nowrap truncate text-center space-x-2">
+                                  <button className="text-white bg-yellow-500 rounded-md p-2 hover:text-yellow-500 hover:bg-white transition delay-0 ease-out">
+                                    <HiPencil />
+                                  </button>
+                                  <button
+                                    className="text-white bg-red-500 rounded-md p-2 hover:text-red-500 hover:bg-white transition delay-0 ease-out"
+                                    onClick={() => handleDeleteUser(user.id)}
+                                  >
+                                    <HiTrash />
+                                  </button>
+                                </td>
+                              </tr>
+                            )
+                          })}
+                        {usersData.length === 1 && (
+                          <tr className="font-regular">
+                            <td colSpan={5} className="p-4 text-center">
+                              No users found.
                             </td>
                           </tr>
-                        )
-                      })}
-                  </tbody>
-                </table>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
           )}

@@ -11,9 +11,9 @@ export default function Profile() {
   if (session) {
     return (
       <DashboardLayout>
-        <section className="h-full w-full space-y-6">
+        <section className="h-full w-full space-y-6 md:mx-8 lg:mx-16">
           <h1 className="text-2xl font-bold">Profile</h1>
-          <div className="flex justify-start items-center gap-10">
+          <div className="flex flex-col md:flex-row justify-start items-center gap-10">
             <div className="w-24 h-24">
               <Image
                 src={session?.user?.image || ""}
@@ -28,7 +28,7 @@ export default function Profile() {
           <div className="flex flex-col justify-center items-start gap-2">
             <label>Name</label>
             <input
-              className="border p-2 rounded-md w-1/3"
+              className="border p-2 rounded-md w-full md:w-1/3"
               value={session?.user?.name || ""}
               disabled
             ></input>
@@ -36,7 +36,7 @@ export default function Profile() {
           <div className="flex flex-col justify-center items-start gap-2">
             <label>Email</label>
             <input
-              className="border p-2 rounded-md w-1/3"
+              className="border p-2 rounded-md w-full md:w-1/3"
               value={session?.user?.email || ""}
               disabled
             ></input>
@@ -46,7 +46,7 @@ export default function Profile() {
               <label>Ingin menjadi Penjual? Klik tombol dibawah ini</label>
               <Link
                 href={`https://wa.me/6281251810907?text=Halo%20pak/bu,%20saya%20tertarik%20untuk%20menjadi%20Penjual.%20apa%20saja%20yang%20harus%20saya%20siapkan%20`}
-                className="text-white border border-green-500 bg-green-500 w-1/3 flex justify-center items-center gap-3 py-3 rounded-md hover:text-green-500 hover:bg-white transition delay-0 ease-in-out"
+                className="text-white border border-green-500 bg-green-500 w-full md:w-1/3 flex justify-center items-center gap-3 py-3 rounded-md hover:text-green-500 hover:bg-white transition delay-0 ease-in-out"
               >
                 <AiOutlineWhatsApp />
                 Whatsapp

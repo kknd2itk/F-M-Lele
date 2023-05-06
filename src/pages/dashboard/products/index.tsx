@@ -62,7 +62,7 @@ export default function UserManagement({ products: initialProducts }: any) {
             <div className="w-full h-full overflow-x-auto">
               <div className="w-full mx-auto py-3 px-4 sm:px-6 lg:px-8">
                 <h1 className="text-2xl font-bold">Manajemen Produk</h1>
-                <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mt-4">
+                <div className="shadow border-b border-gray-200 sm:rounded-lg mt-4">
                   <div className="overflow-x-auto overflow-y-auto h-[60vh]">
                     <table className="max-w-full divide-y divide-gray-200">
                       <thead className="bg-gray-50">
