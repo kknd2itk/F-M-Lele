@@ -11,7 +11,7 @@ export default function Home() {
       <div className="hidden md:flex w-1/2 justify-center items-center">
         <Image src={img1} alt="Illustrasi Pemancingan" />
       </div>
-      <div className="w-full md:w-1/2 gap-1 md:gap-2 lg:gap-4 lg:h-[80%] flex flex-col justify-center px-16 rounded-lg bg-gradient-to-br from-cyan-50 to-cyan-100 text-gradient drop-shadow-md">
+      <div className="w-full md:w-1/2 gap-1 md:gap-2 lg:gap-4 h-[85%] lg:h-[80%] flex flex-col justify-center px-16 rounded-lg bg-gradient-to-br from-cyan-50 to-cyan-100 text-gradient drop-shadow-md">
         <h1 className="text-2xl pt-5 md:pt-10 lg:pt-0 md:text-4xl lg:text-6xl font-black text-blue-800-to-blue-900 text-cyan-950">
           Fishindo
         </h1>

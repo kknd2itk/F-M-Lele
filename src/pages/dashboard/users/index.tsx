@@ -178,9 +178,6 @@ export default function UserManagement({ users: initialUsers }: any) {
                                   </button>
                                 </td>
                                 <td className="px-2 py-4 whitespace-nowrap truncate text-center space-x-2">
-                                  <button className="text-white bg-yellow-500 rounded-md p-2 hover:text-yellow-500 hover:bg-white transition delay-0 ease-out">
-                                    <HiPencil />
-                                  </button>
                                   <button
                                     className="text-white bg-red-500 rounded-md p-2 hover:text-red-500 hover:bg-white transition delay-0 ease-out"
                                     onClick={() => handleDeleteUser(user.id)}

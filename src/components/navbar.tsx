@@ -56,7 +56,7 @@ export const Navbar = () => {
           >
             Marketplace
           </Link>
-          <Link
+          {/* <Link
             href={"/forum"}
             onClick={() => {
               setSidebar(false)
@@ -64,7 +64,7 @@ export const Navbar = () => {
             className="border-2 border-transparent hover:border-b-cyan-300 py-2"
           >
             Forum
-          </Link>
+          </Link> */}
           {session ? (
             <li
               className="relative cursor-pointer "
@@ -85,12 +85,18 @@ export const Navbar = () => {
                 <ul className="bg-white text-[#222]">
                   <Link
                     href={"/dashboard"}
+                    onClick={() => {
+                      setSidebar(false)
+                    }}
                     className="flex border border-transparent px-3 py-2 w-11/12 mx-3 my-2 hover:border-cyan-800 rounded-md"
                   >
                     Dashboard
                   </Link>
                   <Link
                     href={"/dashboard/profile"}
+                    onClick={() => {
+                      setSidebar(false)
+                    }}
                     className="flex border border-transparent px-3 py-2 w-11/12 mx-3 my-2 hover:border-cyan-800 rounded-md"
                   >
                     My Profile

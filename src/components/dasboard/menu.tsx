@@ -26,6 +26,7 @@ export const DashboardMenu = () => {
       >
         <Link
           href={"/dashboard"}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="block p-3 hover:bg-cyan-500 hover:text-white rounded-md"
         >
           Dashboard
@@ -33,6 +34,7 @@ export const DashboardMenu = () => {
         {session?.user?.role === "SELLER" && (
           <Link
             href={"/dashboard/products"}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="block p-3 hover:bg-cyan-500 hover:text-white rounded-md"
           >
             Product Management
@@ -41,6 +43,7 @@ export const DashboardMenu = () => {
         {session?.user?.role === "ADMIN" && (
           <Link
             href={"/dashboard/products"}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="block p-3 hover:bg-cyan-500 hover:text-white rounded-md"
           >
             Product Management
@@ -49,6 +52,7 @@ export const DashboardMenu = () => {
         {session?.user?.role === "ADMIN" && (
           <Link
             href={"/dashboard/users"}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="block p-3 hover:bg-cyan-500 hover:text-white rounded-md"
           >
             User Management
@@ -56,6 +60,7 @@ export const DashboardMenu = () => {
         )}
         <Link
           href={"/dashboard/profile"}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="block p-3 hover:bg-cyan-500 hover:text-white rounded-md"
         >
           Profile

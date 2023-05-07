@@ -21,7 +21,7 @@ export async function getServerSideProps() {
   }
 }
 
-export default function UserManagement({ products: initialProducts }: any) {
+export default function ProductManagement({ products: initialProducts }: any) {
   const { data: session } = useSession()
   const [datas, setDatas] = useState(initialProducts)
   const [isDeleting, setIsDeleting] = useState(false)
@@ -122,9 +122,12 @@ export default function UserManagement({ products: initialProducts }: any) {
                               {data.sellerName}
                             </td>
                             <td className="px-2 py-4 whitespace-nowrap flex justify-center items-center gap-3">
-                              <button className="text-white bg-yellow-500 rounded-md p-2 hover:text-yellow-500 hover:bg-white transition delay-0 ease-out">
+                              <Link
+                                href={`/dashboard/products/${data.id}`}
+                                className="text-white bg-yellow-500 rounded-md p-2 hover:text-yellow-500 hover:bg-white transition delay-0 ease-out"
+                              >
                                 <HiPencil />
-                              </button>
+                              </Link>
                               <button
                                 className="text-white bg-red-500 rounded-md p-2 hover:text-red-500 hover:bg-white transition delay-0 ease-out"
                                 onClick={() => handleDeleteProduct(data.id)}
