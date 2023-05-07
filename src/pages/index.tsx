@@ -30,12 +30,12 @@ export default function Home() {
             >
               Marketplace
             </Link>
-            <Link
+            {/* <Link
               className="border bg-cyan-500 text-xs md:text-sm lg:text-md p-2 lg:p-3 text-white w-max lg:px-8 lg:py-4 cursor-pointer rounded-md font-medium hover:bg-gradient-to-br hover:text-cyan-800 hover:border-cyan-800 transition delay-0 ease-in"
               href={"/forum"}
             >
               Forum
-            </Link>
+            </Link> */}
           </div>
         ) : (
           <button
